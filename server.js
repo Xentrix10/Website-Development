@@ -4,13 +4,16 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const https = require("https");
 const request = require("request");
+ var path = require('path')
 
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 
 
+
 app.get("/", function(req, res){
   res.sendFile(__dirname + "/index.html");
+
 });
 
 app.post("/", function(req, res){
@@ -35,8 +38,8 @@ app.post("/", function(req, res){
             res.write("<h1>"+ cityName +"</h1>");
             res.write("<p>The weather is currently "+ weatherDescription +"</p>");
             res.write("<p>Temperature:"+ ctemp +" <br> Feels like: "+ cftemp +" <br>TimeZone: "+ timeZone +" hrs </p>");
-            res.write("<p>Date : " +date+ "</p>");
-            res.write("<br> "+weatherTimezone);
+            // res.write("<p>Date : " +date+ "</p>");
+            // res.write("<br> "+weatherTimezone);
             res.send();
         });
     });
