@@ -52,32 +52,33 @@ app.set('view engine', 'ejs');
 
   app.get("/", function(req, res){
     const apiKey = "c88bf63f13fad37ad0261d3a37db971e";
-    const cityName = "New York";
+    const cityName = "London";
     const unit = "metric";
 
 
+
     const url = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName +"&appid="+ apiKey+"&units="+ unit ;
-    const lcurl = "http://ip-api.com/json";
+
     https.get(url , function(response){
       console.log(response.statusCode);
-
-              response.on("data", function(data){
-              const weatherData = JSON.parse(data);
-
-
-              let cftemp = weatherData.main.feels_like;
-              let ctemp = weatherData.main.temp;
-              ctemp = Math.round(ctemp);
-              const weatherDescription = weatherData.weather[0].main;
-              const timeZone = (weatherData.timezone)/3600;
-              const date = weatherData.dt
-              let weatherTimezone = new Date(weatherData.dt * 1000 - weatherData.timezone * 1000);
-              res.render('index', {ptemp: ctemp});
-          });
-      });
+        response.on("data", function(data){
+        const weatherData = JSON.parse(data);
 
 
+        let cftemp = weatherData.main.feels_like;
+        let ctemp = weatherData.main.temp;
+        ctemp = Math.round(ctemp);
+        const weatherDescription = weatherData.weather[0].main;
+        const timeZone = (weatherData.timezone)/3600;
+        const date = weatherData.dt
+        let weatherTimezone = new Date(weatherData.dt * 1000 - weatherData.timezone * 1000);
+        res.render('index', {ptemp: ctemp});
+     });
+    });
 
+  });
+
+  app.get("/wallet", function(req, res){
 
   });
 
