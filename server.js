@@ -80,6 +80,32 @@ app.set('view engine', 'ejs');
 
   app.get("/wallet", function(req, res){
 
+    wapiKey = "FETQVSA29LBH1M9N";
+    let fromc = "GBP";
+    let toc = "USD";
+    const wurl = "https://www.alphavantage.co/query?function=FX_DAILY&from_symbol="+fromc+"&to_symbol="+toc+"&apikey=+"+wapiKey;
+
+    https.get(wurl , function(response){
+      console.log(response.statusCode);
+        response.on("data", function(data){
+        const walletData = JSON.parse(data);
+
+        let reading = walletData[1].[0].[4];
+        reading = Math.round(reading);
+
+        // let cftemp = weatherData.main.feels_like;
+        // let ctemp = weatherData.main.temp;
+        //
+        // const weatherDescription = weatherData.weather[0].main;
+        // const timeZone = (weatherData.timezone)/3600;
+        // const date = weatherData.dt
+        // let weatherTimezone = new Date(weatherData.dt * 1000 - weatherData.timezone * 1000);
+     });
+    });
+
+
+    res.render('sm', {ereading: reading});
+
   });
 
 
